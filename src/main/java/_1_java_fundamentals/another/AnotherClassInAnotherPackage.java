@@ -6,9 +6,16 @@ public class AnotherClassInAnotherPackage {
     NestedClasses nestedClasses = new NestedClasses();
 
     public void method(){
-        NestedClasses.InnerClassPublic a = nestedClasses.new InnerClassPublic();
-        System.out.println(a.nc);
-        System.out.println(a.publicText);
+        NestedClasses.PublicInnerClass publicInnerClass = nestedClasses.new PublicInnerClass();
+
+        //innerProtectedMethod is not visible from this class.
+
+        // innerPackageProtectedMethod is not visible from this class.
+
+        // innerPrivateMethod is not visible from this class.
+
+        System.out.println(publicInnerClass.nc);
+        System.out.println(publicInnerClass.publicText);
 
     }
 }

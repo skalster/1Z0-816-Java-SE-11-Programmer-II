@@ -17,17 +17,18 @@ package _1_java_fundamentals;
 
 public class NestedClasses {
 
+    // Static block
     {
         // variables
-        System.out.println(InnerClassStaticPrivate.staticPrivateText);
+        System.out.println(PublicStaticInnerClass.staticPrivateText);
         // Methods
-        InnerClassStaticPrivate.privateStaticMethod();
-        InnerClassStaticPrivate.publicStaticMethod();
+        PublicStaticInnerClass.privateStaticMethod();
+        PublicStaticInnerClass.publicStaticMethod();
     }
 
     private String text; // Not accessible (or visible) from inner classes.
-    private final String finalText = "finalText"; // Accessible from InnerClasses as is final.
-    private NestedClasses.InnerClassProtected protectedClazzField = this.new InnerClassProtected();
+    private final String finalText = "finalText"; // Accessible from InnerClasses as it is final.
+    private ProtectedInnerClass protectedClazzField = this.new ProtectedInnerClass();
 
     public NestedClasses() {
         usingPublicNestedClass();
@@ -39,15 +40,15 @@ public class NestedClasses {
         usingPrivateNestedClass();
     }
 
-    public void usingPublicNestedClass() {
+    private void usingPublicNestedClass() {
         NestedClasses nestedClazz = new NestedClasses();
 
         // Public
-        NestedClasses.InnerClassPublic clazz = this.new InnerClassPublic();
-        NestedClasses.InnerClassPublic clazz2 = nestedClazz.new InnerClassPublic();
+        PublicInnerClass clazz = this.new PublicInnerClass();
+        PublicInnerClass clazz2 = nestedClazz.new PublicInnerClass();
 
         // InnerClassPublic variables
-        clazz.privateText = "ModifyingOuterMethod";
+        clazz.privateTextPublicClass = "ModifyingOuterMethod";
         clazz.publicText = "ModifyingOuterMethod";
 
         // InnerClassPublic methods
@@ -59,23 +60,23 @@ public class NestedClasses {
 
     }
 
-    public void usingProtectedNestedClass(){
+    private void usingProtectedNestedClass(){
         NestedClasses nestedClazz = new NestedClasses();
         // Protected
-        NestedClasses.InnerClassProtected protectedClazz = this.new InnerClassProtected();
-        NestedClasses.InnerClassProtected protectedClazz2 = nestedClazz.new InnerClassProtected();
+        ProtectedInnerClass protectedClazz = this.new ProtectedInnerClass();
+        ProtectedInnerClass protectedClazz2 = nestedClazz.new ProtectedInnerClass();
 
         protectedClazz.privateText = "";
-        protectedClazz.publicText = "";
+//        protectedClazz.publicText = "";
 
 
     }
 
-    public void usingPackageProtectedNestedClass(){
+    private void usingPackageProtectedNestedClass(){
         NestedClasses nestedClazz = new NestedClasses();
         // Protected
-        NestedClasses.InnerClassPackageProtected classPackageProtected = this.new InnerClassPackageProtected();
-        NestedClasses.InnerClassPackageProtected protectedClazz2 = nestedClazz.new InnerClassPackageProtected();
+        PackageProtectedInnerClass classPackageProtected = this.new PackageProtectedInnerClass();
+        PackageProtectedInnerClass protectedClazz2 = nestedClazz.new PackageProtectedInnerClass();
 
         classPackageProtected.privateText = "";
         classPackageProtected.publicText = "";
@@ -83,37 +84,36 @@ public class NestedClasses {
 
     }
 
-    public void usingPrivateNestedClass(){
+    private void usingPrivateNestedClass(){
         NestedClasses nestedClazz = new NestedClasses();
         // Private
-        NestedClasses.InnerClassProtected protectedClazz = this.new InnerClassProtected();
-        NestedClasses.InnerClassProtected protectedClazz2 = nestedClazz.new InnerClassProtected();
+        PrivateInnerClass privateInnerClass = this.new PrivateInnerClass();
+        PrivateInnerClass privateInnerClass2 = nestedClazz.new PrivateInnerClass();
 
-        protectedClazz.privateText = "";
-        protectedClazz.publicText = "";
-
-
-    }
-
-    public void usingStaticNestedClass(){
-        NestedClasses nestedClazz = new NestedClasses();
-        // Protected
-        NestedClasses.InnerClassProtected protectedClazz = this.new InnerClassProtected();
-        NestedClasses.InnerClassProtected protectedClazz2 = nestedClazz.new InnerClassProtected();
-
-        protectedClazz.privateText = "";
-        protectedClazz.publicText = "";
+        privateInnerClass.privateText = "";
+//        privateInnerClass2.publicText = "";
 
 
     }
 
-    public class InnerClassPublic {
-        private String privateText;
+    private void usingStaticNestedClass(){
+
+        NestedClasses.PublicStaticInnerClass.publicStaticMethod();
+
+        NestedClasses.ProtectedStaticInnerClass.publicStaticMethod();
+
+        NestedClasses.PackageProtectedStaticInnerClass.publicStaticMethod();
+
+        NestedClasses.StaticPrivateInnerClass.publicStaticMethod();
+    }
+
+    public class PublicInnerClass {
+        private String privateTextPublicClass;
         public String publicText;
         public NestedClasses nc = new NestedClasses();
 
-        public InnerClassPublic() {
-            privateText = "constructorPrivateText";
+        public PublicInnerClass() {
+            privateTextPublicClass = "constructorPrivateText";
             publicText = "constructorPublicText";
         }
 
@@ -135,33 +135,91 @@ public class NestedClasses {
         }
     }
 
-    protected class InnerClassProtected {
-        private String privateText;
+    /**
+     * If the class inherits from another class then protected doesn't compile in the subclass.
+     * If a protected class inherits from a public class and the protected class is the parent for a class in another
+     * package. Then the subclass can NOT instantiate the protected parent class. It can contain a reference but not
+     * use the keyword new.
+     *
+     */
+    protected class ProtectedInnerClass {
+        private String privateText = "privateText";
+        private String privateTextPublicClass;
         public String publicText;
-    }
+        public NestedClasses nc = new NestedClasses();
 
-    class InnerClassPackageProtected {
-        private String privateText;
-        public String publicText;
-    }
-
-    private class InnerClassPrivate {
-        private String privateText;
-        public String publicText;
-    }
-
-    private static class InnerClassStaticPrivate {
-        public static String staticPublicText;
-        private static String staticPrivateText;
-
-        // OuterClass.StaticNestedClass nestedObject =
-        //     new OuterClass.StaticNestedClass();
-        public static void publicStaticMethod(){
-            System.out.println("Static inner method");
+        public ProtectedInnerClass() {
+            privateTextPublicClass = "constructorPrivateText";
+            publicText = "constructorPublicText";
         }
-        private static void privateStaticMethod(){
-            System.out.println("Static inner method");
+
+        public void innerPublicMethod(){
+            nc.text = "";
+            System.out.println(finalText); // Accessible from InnerClasses as is final.
         }
+
+        protected void innerProtectedMethod(){
+            System.out.println("innerProtectedMethod");
+        }
+
+        void innerPackageProtectedMethod(){
+            System.out.println("innerProtectedMethod");
+        }
+
+        private void innerPrivateMethod(){
+            System.out.println("innerPrivateMethod");
+        }
+    }
+
+    class PackageProtectedInnerClass extends PublicInnerClass {
+        private String privateText = "privateText";
+    }
+
+    private class PrivateInnerClass extends PublicInnerClass {
+        private String privateText = "privateText";
+    }
+
+    public static class PublicStaticInnerClass {
+        public static String staticPublicText = "staticPublicText";
+        protected static String staticProtectectedText = "staticProtectectedText";
+        static String staticPackageProtectectedText = "staticPackageProtectectedText";
+        private static String staticPrivateText = "staticPrivateText";
+
+        public static void publicStaticMethod(){ System.out.println("Static inner method"); }
+
+        protected static void protectedStaticMethod() { System.out.println("Static inner method"); }
+
+        static void packageProtectedStaticMethod(){ System.out.println("Static inner method"); }
+
+        private static void privateStaticMethod(){ System.out.println("Static inner method"); }
+    }
+
+    /**
+     * ProtectedStaticInnerClass is the same class as PublicStaticInnerClass, only with the diference of the class
+     * accessor protected.
+     *
+     */
+    protected static class ProtectedStaticInnerClass extends PublicStaticInnerClass{
+        // Avoid writing duplicate code.
+    }
+
+
+    /**
+     * PackageProtectedStaticInnerClass is the same class as PublicStaticInnerClass, only with the diference of the class
+     * accessor package protected.
+     *
+     */
+    static class PackageProtectedStaticInnerClass extends PublicStaticInnerClass {
+        // Avoid writing duplicate code.
+    }
+
+    /**
+     * PackageProtectedStaticInnerClass is the same class as PublicStaticInnerClass, only with the diference of the class
+     * accessor private.
+     *
+     */
+    private static class StaticPrivateInnerClass extends PublicStaticInnerClass{
+        // Avoid writing duplicate code.
     }
 
 }
