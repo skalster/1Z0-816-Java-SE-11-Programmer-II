@@ -18,7 +18,7 @@ package _1_java_fundamentals;
 public class NestedClasses {
 
     // Static block
-    {
+    static {
         // variables
         System.out.println(PublicStaticInnerClass.staticPrivateText);
         // Methods
