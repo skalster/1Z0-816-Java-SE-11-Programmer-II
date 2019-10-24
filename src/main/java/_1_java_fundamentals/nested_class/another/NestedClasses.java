@@ -1,4 +1,4 @@
-package _1_java_fundamentals;
+package _1_java_fundamentals.nested_class.another;
 
 /**
  * Modifiers Applied

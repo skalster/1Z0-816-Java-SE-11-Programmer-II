@@ -1,6 +1,4 @@
-package _1_java_fundamentals.another;
-
-import _1_java_fundamentals.NestedClasses;
+package _1_java_fundamentals.nested_class.another;
 
 public class AnotherClassInAnotherPackage {
     NestedClasses nestedClasses = new NestedClasses();
