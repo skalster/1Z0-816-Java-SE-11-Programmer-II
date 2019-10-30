@@ -6,9 +6,36 @@ package _4_built_in_functional_interfaces;
 
     Use core functional interfaces including Predicate, Consumer, Function and Supplier
     Use primitive and binary variations of base interfaces of java.util.function package
+
+    Consumers 8
+    Functions 11
+    Supplier 5
+    Unary 3
+    Binary 4
+    Predicate 4
+
+
  */
 
-import java.util.function.*;
+import java.util.Comparator;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
+import java.util.function.BinaryOperator;
+import java.util.function.BooleanSupplier;
+import java.util.function.Consumer;
+import java.util.function.DoubleBinaryOperator;
+import java.util.function.DoubleConsumer;
+import java.util.function.DoubleFunction;
+import java.util.function.DoublePredicate;
+import java.util.function.DoubleSupplier;
+import java.util.function.DoubleToIntFunction;
+import java.util.function.DoubleToLongFunction;
+import java.util.function.DoubleUnaryOperator;
+import java.util.function.Function;
+import java.util.function.IntBinaryOperator;
+import java.util.function.IntConsumer;
+import java.util.function.IntFunction;
 
 public class UseUtilFunction {
 
@@ -33,7 +60,16 @@ public class UseUtilFunction {
     public void useBinaryOperator() {
         BinaryOperator<String> binaryOperator = (o, o2) -> o + o2;
         String binaryOperatorResult = binaryOperator.apply("BinaryOperator ", " test");
+//        binaryOperator.andThen();
+//        BinaryOperator.maxBy();
+//        BinaryOperator.minBy();
         System.out.println("Function result: " + binaryOperatorResult);
+
+        BinaryOperator<Integer> biMaxBy = BinaryOperator.maxBy(Comparator.naturalOrder());
+        System.out.println("BinaryOperator.maxBy 8 and 9 natural order: " + biMaxBy.apply(8, 9));
+
+        BinaryOperator<Integer> biMinBy = BinaryOperator.minBy(Comparator.naturalOrder());
+        System.out.println("BinaryOperator.maxBy 2 and 4 natural order: " + biMinBy.apply(2, 4));
     }
 
     // Java c
@@ -139,6 +175,25 @@ public class UseUtilFunction {
 //        functionAppendSpace.compose();
     }
 
+    public void useIntBinaryOperator() {
+        IntBinaryOperator intBinaryOperator = (i, i1) -> i + i1;
+
+        System.out.println("IntBinaryOperator " + intBinaryOperator.applyAsInt(5, 4));
+    }
+
+    public void useIntConsumer() {
+        IntConsumer intConsumer = i -> System.out.println("IntConsumer 5");
+        IntConsumer intConsumer2 = i -> System.out.println(i);
+
+        intConsumer.accept(5);
+        intConsumer.andThen(intConsumer); // Default method;
+    }
+
+    public void useIntFunction() {
+        IntFunction intFunction = i -> i + 1;
+        System.out.println("IntFunction " + intFunction.apply(5));
+    }
+
 
     public static void main(String[] args) {
         UseUtilFunction useUtilFunction = new UseUtilFunction();
@@ -172,6 +227,12 @@ public class UseUtilFunction {
         useUtilFunction.useDoubleUnaryOperator();
 
         useUtilFunction.useFunction();
+
+        useUtilFunction.useIntBinaryOperator();
+
+        useUtilFunction.useIntConsumer();
+
+        useUtilFunction.useIntFunction();
     }
 
 }
