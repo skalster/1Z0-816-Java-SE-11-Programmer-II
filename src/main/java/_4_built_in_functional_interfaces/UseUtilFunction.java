@@ -19,12 +19,8 @@ package _4_built_in_functional_interfaces;
 
 import java.util.Comparator;
 import java.util.Random;
-import java.util.function.BiFunction;
-import java.util.function.BiPredicate;
 import java.util.function.BinaryOperator;
-import java.util.function.BooleanSupplier;
 import java.util.function.DoubleBinaryOperator;
-import java.util.function.DoubleFunction;
 import java.util.function.DoublePredicate;
 import java.util.function.DoubleSupplier;
 import java.util.function.DoubleToIntFunction;
@@ -59,15 +55,7 @@ public class UseUtilFunction {
 
 
 
-    public void useBiFunction() {
-        BiFunction<String, String, String> biFunction = (o, o2) -> {
-            System.out.print(o);
-            System.out.println(o2);
-            return o + o2;
-        };
-        String biFunctionResult = biFunction.apply("BiFunction ", " test");
-        System.out.println("Function result: " + biFunctionResult);
-    }
+
 
     public void useBinaryOperator() {
         BinaryOperator<String> binaryOperator = (o, o2) -> o + o2;
@@ -84,35 +72,9 @@ public class UseUtilFunction {
         System.out.println("BinaryOperator.maxBy 2 and 4 natural order: " + biMinBy.apply(2, 4));
     }
 
-    // Java c
-    // omparison comparators == != < > <= >=
-    public void useBiPredicate() {
-        int number1 = 5;
-        int number2 = 4;
 
-        BiPredicate<Integer, Integer> biPredicateEquals = (o, o2) -> o == o2;
-        BiPredicate<Integer, Integer> biPredicateNotEquals = (o, o2) -> o != o2;
-        BiPredicate<Integer, Integer> biPredicateBiggerThan = (o, o2) -> o > o2;
-        //        BiPredicate<Integer, Integer> biPredicate = Object::equals; //Also compiles.
 
-        System.out.println("BiPredicate bigger than: " + number1 + " " + number2 + " " +
-                biPredicateBiggerThan.test(number1, number2));
 
-        System.out.println("BiPredicate bigger than AND not equal test: " + number1 + " " + number2 + " " +
-                biPredicateBiggerThan.and(biPredicateNotEquals).test(number1, number2));
-
-        System.out.println("BiPredicate bigger than OR  equal test: " + number2 + " " + number2 + " " +
-                biPredicateBiggerThan.or(biPredicateEquals).test(number2, number2));
-
-        System.out.println("BiPredicate negate equal test: " + number1 + " " + number2 + " " +
-                biPredicateEquals.negate().test(number1, number2));
-    }
-
-    public void useBooleanSupplier() {
-        BooleanSupplier booleanSupplierIsEmptySpace = () -> "".isEmpty();
-//        BooleanSupplier booleanSupplierIsEmptySpace = ""::isEmpty; // Also compiles
-        System.out.println("BooleanSupplier booleanSupplierIsEmptySpace" + booleanSupplierIsEmptySpace.getAsBoolean());
-    }
 
 
     public void useDoubleBinaryOperator() {
@@ -120,11 +82,7 @@ public class UseUtilFunction {
         System.out.println("DoubleBinaryOperator: " + doubleBinaryOperator.applyAsDouble(0.88, 0.99));
     }
 
-    public void useDoubleFunction() {
-        DoubleFunction doubleFunction = v -> v + 1.0;
 
-        System.out.println("DoubleFunction " + doubleFunction.apply(2.1));
-    }
 
     public void useDoublePredicate() {
         DoublePredicate doublePredicateIsBiggerThanZero = v -> v > 0.0d;
@@ -326,13 +284,13 @@ public class UseUtilFunction {
 
 //        useUtilFunction.useBiConsumer();
 
-        useUtilFunction.useBiFunction();
+//        useUtilFunction.useBiFunction();
 
         useUtilFunction.useBinaryOperator();
 
-        useUtilFunction.useBiPredicate();
+//        useUtilFunction.useBiPredicate();
 
-        useUtilFunction.useBooleanSupplier();
+//        useUtilFunction.useBooleanSupplier();
 
 //        useUtilFunction.useConsumer();
 
@@ -340,7 +298,7 @@ public class UseUtilFunction {
 
 //        useUtilFunction.useDoubleConsumer();
 
-        useUtilFunction.useDoubleFunction();
+//        useUtilFunction.useDoubleFunction();
 
         useUtilFunction.useDoublePredicate();
 
